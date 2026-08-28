@@ -18,4 +18,60 @@ describe('ProductoFormulario', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('debe ser invalido cuando los campos obligatorios estan vacios', () => {
+    const formulario = component['formulario'];
+    formulario.setValue({
+      codigo: '',
+      nombre: '',
+      categoria: '',
+      precioCompra: 0,
+      precioVenta: 0,
+      existencias: 0,
+      stockMinimo: 1,
+      proveedor: '',
+      fechaIngreso: '',
+      descripcion: '',
+      activo: true,
+    });
+    expect(formulario.invalid).toBe(true);
+    expect(formulario.get('codigo')?.hasError('required')).toBe(true);
+    expect(formulario.get('nombre')?.hasError('required')).toBe(true);
+  });
+
+  it('debe ser valido con todos los campos correctos', () => {
+    const formulario = component['formulario'];
+    formulario.setValue({
+      codigo: 'P-001',
+      nombre: 'Arroz',
+      categoria: 'Alimentos',
+      precioCompra: 10,
+      precioVenta: 15,
+      existencias: 50,
+      stockMinimo: 5,
+      proveedor: 'Distribuidora A',
+      fechaIngreso: '2026-08-28',
+      descripcion: 'Paquete de arroz',
+      activo: true,
+    });
+    expect(formulario.valid).toBe(true);
+  });
+
+  it('debe fallar la validacion cruzada cuando precioVenta <= precioCompra', () => {
+    const formulario = component['formulario'];
+    formulario.patchValue({
+      precioCompra: 20,
+      precioVenta: 15,
+    });
+    expect(formulario.hasError('precioVentaMayorQueCompra')).toBe(true);
+  });
+
+  it('debe pasar la validacion cruzada cuando precioVenta > precioCompra', () => {
+    const formulario = component['formulario'];
+    formulario.patchValue({
+      precioCompra: 10,
+      precioVenta: 15,
+    });
+    expect(formulario.hasError('precioVentaMayorQueCompra')).toBe(false);
+  });
 });
