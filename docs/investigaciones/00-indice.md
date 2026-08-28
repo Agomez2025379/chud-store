@@ -6,4 +6,4 @@ Registro de los temas investigados en el proyecto. Cada tema es un documento en 
 
 | Fecha | Tema | Estado | Documento |
 | --- | --- | --- | --- |
-<!-- Añadir aquí cada nueva investigación: fecha, tema, estado y enlace al documento. -->
+| 28/08/26 | FormGroup, FormControl y validaciones | En revisión | [formgroup-formcontrol-validaciones.md](formgroup-formcontrol-validaciones.md) |
