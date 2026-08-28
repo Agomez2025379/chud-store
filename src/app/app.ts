@@ -9,4 +9,9 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 })
 export class App {
   protected readonly titulo = 'ChudStore';
+  protected dialogoVisible = true;
+
+  protected cerrarDialogo(): void {
+    this.dialogoVisible = false;
+  }
 }

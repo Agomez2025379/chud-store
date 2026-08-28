@@ -1,13 +1,80 @@
-<header class="app-header">
-  <h1>ChudStore</h1>
-  <nav>
-    <a routerLink="/" routerLinkActive="activo" [routerLinkActiveOptions]="{ exact: true }"
-      >Registro de producto</a
-    >
-    <a routerLink="/listado" routerLinkActive="activo">Listado</a>
-  </nav>
-</header>
+<main class="collage-shell">
+  <div class="grain" aria-hidden="true"></div>
 
-<main class="contenido">
-  <router-outlet />
+  <section class="codigo-fondo" aria-hidden="true">
+    <span>class Anticitizen : public CombineSubject &#123;</span>
+    <span>&nbsp;&nbsp;string sku = "CHUD-C17";</span>
+    <span>&nbsp;&nbsp;int ration_tokens = combine_registry.read();</span>
+    <span>&nbsp;&nbsp;bool is_gem() &#123;</span>
+    <span>&nbsp;&nbsp;&nbsp;&nbsp;return ration_tokens &gt; 0;</span>
+    <span>&nbsp;&nbsp;&#125;</span>
+    <span>&#125;;</span>
+    <span class="codigo-fino">// MILLIONS MUST PICK UP THAT CAN
+    </span>
+    <span>      // El terror en insta</span>
+  </section>
+
+  <header class="app-header">
+    <h1 class="sr-only">ChudStore</h1>
+    <a class="marca" routerLink="/" aria-label="Ir al inicio">
+      <span class="marca-sello">CS</span>
+      <span>CHUD<span class="marca-asterisco">*</span>STORE</span>
+    </a>
+    <p class="edicion">ARCHIVE / 2026</p>
+    <nav aria-label="Navegación principal">
+      <a routerLink="/" routerLinkActive="activo" [routerLinkActiveOptions]="{ exact: true }"
+        >Nuevo producto</a
+      >
+      <a routerLink="/listado" routerLinkActive="activo">Inventario</a>
+    </nav>
+  </header>
+
+  <div class="recorte recorte-retrato" aria-label="Retrato en duotono"></div>
+  <div class="recorte recorte-bomba" aria-label="Objeto vintage con etiqueta UX">
+    <span>UX</span>
+  </div>
+  <div class="recorte recorte-foto" aria-label="Fotografía en duotono"></div>
+
+  <section class="firma" aria-label="Autor">
+    <span class="firma-indice">ONLY CHUDS ALLOWED</span>
+    <strong>LOQUENDO<br />CITY</strong>
+    <span class="firma-fecha">CHUDESST WEB DESIGN<br />EST. 2000</span>
+  </section>
+
+  <section class="panel-app" aria-label="Aplicación de inventario">
+    <div class="panel-app-cinta">LIVE chud-INVENTORY <span>●</span></div>
+    <router-outlet />
+  </section>
+
+  <section class="nota-brutalista">
+    <div class="nota-header">Best chudder Websites <span>↗</span></div>
+    <p>
+      Im a chud im a chud im surely a chud
+      ola pofe ola pófe pofeeee
+      jeje
+    </p>
+    <small>NO FEELINGS / CS </small>
+  </section>
+
+  <div class="humo" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+
+  @if (dialogoVisible) {
+    <section class="dialogo-win" role="dialog" aria-modal="false" aria-labelledby="dialogo-titulo">
+      <div class="dialogo-barra">
+        <span id="dialogo-titulo">system_message.exe</span>
+        <button type="button" aria-label="Cerrar mensaje" (click)="cerrarDialogo()">X</button>
+      </div>
+      <div class="dialogo-cuerpo">
+        <span class="dialogo-icono">?</span>
+        <p>Dude, are you sure?</p>
+      </div>
+      <div class="dialogo-acciones">
+        <button type="button" (click)="cerrarDialogo()">OK</button>
+        <button type="button" (click)="cerrarDialogo()">Cancel</button>
+      </div>
+    </section>
+  }
+
+  <p class="acento-manuscrito">OOPS, IT WAS SOMENTHING!</p>
+  <span class="coordenadas">40° 25' 09.8&quot; N / 3° 42' 18.1&quot; W</span>
 </main>
