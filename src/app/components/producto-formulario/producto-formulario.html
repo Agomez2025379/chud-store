@@ -1,0 +1,68 @@
+<form [formGroup]="formulario" class="producto-form">
+  <h2>Registro de producto</h2>
+
+  <div class="campo">
+    <label for="codigo">Código</label>
+    <input id="codigo" type="text" formControlName="codigo" />
+  </div>
+
+  <div class="campo">
+    <label for="nombre">Nombre</label>
+    <input id="nombre" type="text" formControlName="nombre" />
+  </div>
+
+  <div class="campo">
+    <label for="categoria">Categoría</label>
+    <select id="categoria" formControlName="categoria">
+      <option value="">Seleccione una categoría</option>
+      <option value="Alimentos">Alimentos</option>
+      <option value="Bebidas">Bebidas</option>
+      <option value="Tecnología">Tecnología</option>
+      <option value="Librería">Librería</option>
+      <option value="Limpieza">Limpieza</option>
+      <option value="Otros">Otros</option>
+    </select>
+  </div>
+
+  <div class="campo">
+    <label for="precioCompra">Precio de compra</label>
+    <input id="precioCompra" type="number" min="0" formControlName="precioCompra" />
+  </div>
+
+  <div class="campo">
+    <label for="precioVenta">Precio de venta</label>
+    <input id="precioVenta" type="number" min="0" formControlName="precioVenta" />
+  </div>
+
+  <div class="campo">
+    <label for="existencias">Existencias</label>
+    <input id="existencias" type="number" min="0" formControlName="existencias" />
+  </div>
+
+  <div class="campo">
+    <label for="stockMinimo">Stock mínimo</label>
+    <input id="stockMinimo" type="number" min="1" formControlName="stockMinimo" />
+  </div>
+
+  <div class="campo">
+    <label for="proveedor">Proveedor</label>
+    <input id="proveedor" type="text" formControlName="proveedor" />
+  </div>
+
+  <div class="campo">
+    <label for="fechaIngreso">Fecha de ingreso</label>
+    <input id="fechaIngreso" type="date" formControlName="fechaIngreso" />
+  </div>
+
+  <div class="campo">
+    <label for="descripcion">Descripción</label>
+    <textarea id="descripcion" rows="3" formControlName="descripcion"></textarea>
+  </div>
+
+  <div class="campo campo-checkbox">
+    <input id="activo" type="checkbox" formControlName="activo" />
+    <label for="activo">Producto activo</label>
+  </div>
+
+  <button type="submit">Guardar</button>
+</form>
