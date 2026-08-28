@@ -64,5 +64,6 @@ Este proyecto se trabaja en modo "coworking IA": un agente de IA colabora con el
 
 - Índice de investigaciones: [docs/investigaciones/00-indice.md](docs/investigaciones/00-indice.md)
 - Plantilla para crear una investigación nueva: [docs/investigaciones/_plantilla.md](docs/investigaciones/_plantilla.md)
+- ngSubmit-preventDefault()-value: [docs/investigaciones/ngSubmit-preventDefault()-value.md](docs/investigaciones/ngSubmit-preventDefault()-value.md)
 
 Para añadir una nueva investigación: copiar la plantilla, completar las secciones y registrar el tema en el índice `docs/investigaciones/00-indice.md`.

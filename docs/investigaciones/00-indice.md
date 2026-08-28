@@ -2,8 +2,6 @@
 
 Registro de los temas investigados en el proyecto. Cada tema es un documento en esta carpeta.
 
-<!-- Plantilla: docs/investigaciones/_plantilla.md -->
-
 | Fecha | Tema | Estado | Documento |
 | --- | --- | --- | --- |
-<!-- Añadir aquí cada nueva investigación: fecha, tema, estado y enlace al documento. -->
+| 28/08/26 | ngSubmit-preventDefault()-value | En revisión | [docs/investigaciones/ngSubmit-preventDefault()-value.md](docs/investigaciones/ngSubmit-preventDefault()-value.md) |
