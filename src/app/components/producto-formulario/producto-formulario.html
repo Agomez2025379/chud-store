@@ -1,14 +1,26 @@
-<form [formGroup]="formulario" class="producto-form">
+<form [formGroup]="formulario" (ngSubmit)="onSubmit()" class="producto-form">
   <h2>Registro de producto</h2>
 
   <div class="campo">
     <label for="codigo">Código</label>
     <input id="codigo" type="text" formControlName="codigo" />
+    <p
+      *ngIf="formulario.get('codigo')?.touched && formulario.get('codigo')?.hasError('required')"
+      class="error"
+    >
+      El código es obligatorio.
+    </p>
   </div>
 
   <div class="campo">
     <label for="nombre">Nombre</label>
     <input id="nombre" type="text" formControlName="nombre" />
+    <p
+      *ngIf="formulario.get('nombre')?.touched && formulario.get('nombre')?.hasError('required')"
+      class="error"
+    >
+      El nombre es obligatorio.
+    </p>
   </div>
 
   <div class="campo">
@@ -22,41 +34,155 @@
       <option value="Limpieza">Limpieza</option>
       <option value="Otros">Otros</option>
     </select>
+    <p
+      *ngIf="
+        formulario.get('categoria')?.touched && formulario.get('categoria')?.hasError('required')
+      "
+      class="error"
+    >
+      Seleccione una categoría.
+    </p>
   </div>
 
   <div class="campo">
     <label for="precioCompra">Precio de compra</label>
     <input id="precioCompra" type="number" min="0" formControlName="precioCompra" />
+    <p
+      *ngIf="
+        formulario.get('precioCompra')?.touched &&
+        formulario.get('precioCompra')?.hasError('required')
+      "
+      class="error"
+    >
+      El precio de compra es obligatorio.
+    </p>
+    <p
+      *ngIf="
+        formulario.get('precioCompra')?.touched && formulario.get('precioCompra')?.hasError('min')
+      "
+      class="error"
+    >
+      El precio de compra no puede ser negativo.
+    </p>
   </div>
 
   <div class="campo">
     <label for="precioVenta">Precio de venta</label>
     <input id="precioVenta" type="number" min="0" formControlName="precioVenta" />
+    <p
+      *ngIf="
+        formulario.get('precioVenta')?.touched &&
+        formulario.get('precioVenta')?.hasError('required')
+      "
+      class="error"
+    >
+      El precio de venta es obligatorio.
+    </p>
+    <p
+      *ngIf="
+        formulario.get('precioVenta')?.touched && formulario.get('precioVenta')?.hasError('min')
+      "
+      class="error"
+    >
+      El precio de venta no puede ser negativo.
+    </p>
+    <p *ngIf="formulario.touched && formulario.hasError('precioVentaMayorQueCompra')" class="error">
+      El precio de venta debe ser mayor que el precio de compra.
+    </p>
   </div>
 
   <div class="campo">
     <label for="existencias">Existencias</label>
     <input id="existencias" type="number" min="0" formControlName="existencias" />
+    <p
+      *ngIf="
+        formulario.get('existencias')?.touched &&
+        formulario.get('existencias')?.hasError('required')
+      "
+      class="error"
+    >
+      Las existencias son obligatorias.
+    </p>
+    <p
+      *ngIf="
+        formulario.get('existencias')?.touched && formulario.get('existencias')?.hasError('min')
+      "
+      class="error"
+    >
+      Las existencias no pueden ser negativas.
+    </p>
   </div>
 
   <div class="campo">
     <label for="stockMinimo">Stock mínimo</label>
     <input id="stockMinimo" type="number" min="1" formControlName="stockMinimo" />
+    <p
+      *ngIf="
+        formulario.get('stockMinimo')?.touched &&
+        formulario.get('stockMinimo')?.hasError('required')
+      "
+      class="error"
+    >
+      El stock mínimo es obligatorio.
+    </p>
+    <p
+      *ngIf="
+        formulario.get('stockMinimo')?.touched && formulario.get('stockMinimo')?.hasError('min')
+      "
+      class="error"
+    >
+      El stock mínimo debe ser al menos 1.
+    </p>
   </div>
 
   <div class="campo">
     <label for="proveedor">Proveedor</label>
     <input id="proveedor" type="text" formControlName="proveedor" />
+    <p
+      *ngIf="
+        formulario.get('proveedor')?.touched && formulario.get('proveedor')?.hasError('required')
+      "
+      class="error"
+    >
+      El proveedor es obligatorio.
+    </p>
   </div>
 
   <div class="campo">
     <label for="fechaIngreso">Fecha de ingreso</label>
     <input id="fechaIngreso" type="date" formControlName="fechaIngreso" />
+    <p
+      *ngIf="
+        formulario.get('fechaIngreso')?.touched &&
+        formulario.get('fechaIngreso')?.hasError('required')
+      "
+      class="error"
+    >
+      La fecha de ingreso es obligatoria.
+    </p>
   </div>
 
   <div class="campo">
     <label for="descripcion">Descripción</label>
     <textarea id="descripcion" rows="3" formControlName="descripcion"></textarea>
+    <p
+      *ngIf="
+        formulario.get('descripcion')?.touched &&
+        formulario.get('descripcion')?.hasError('required')
+      "
+      class="error"
+    >
+      La descripción es obligatoria.
+    </p>
+    <p
+      *ngIf="
+        formulario.get('descripcion')?.touched &&
+        formulario.get('descripcion')?.hasError('maxlength')
+      "
+      class="error"
+    >
+      La descripción no puede superar los 200 caracteres.
+    </p>
   </div>
 
   <div class="campo campo-checkbox">
@@ -64,5 +190,5 @@
     <label for="activo">Producto activo</label>
   </div>
 
-  <button type="submit">Guardar</button>
+  <button type="submit" [disabled]="formulario.invalid">Guardar</button>
 </form>
