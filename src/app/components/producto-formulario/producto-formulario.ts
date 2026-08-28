@@ -2,6 +2,9 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
+import { Producto } from '../../models/producto.model';
+import { Inventario } from '../../services/inventario';
+
 @Component({
   imports: [CommonModule, ReactiveFormsModule],
   selector: 'app-producto-formulario',
@@ -11,7 +14,10 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 export class ProductoFormulario {
   protected readonly formulario: FormGroup;
 
-  constructor(private readonly fb: FormBuilder) {
+  constructor(
+    private readonly fb: FormBuilder,
+    private readonly inventario: Inventario,
+  ) {
     this.formulario = this.fb.group(
       {
         codigo: ['', Validators.required],
@@ -36,11 +42,20 @@ export class ProductoFormulario {
       return;
     }
 
+    const producto = this.formulario.value as Producto;
+    this.inventario.agregar(producto);
+
     this.formulario.reset({
+      codigo: '',
+      nombre: '',
+      categoria: '',
       precioCompra: 0,
       precioVenta: 0,
       existencias: 0,
       stockMinimo: 1,
+      proveedor: '',
+      fechaIngreso: '',
+      descripcion: '',
       activo: true,
     });
   }

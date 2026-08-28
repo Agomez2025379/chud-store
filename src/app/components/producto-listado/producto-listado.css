@@ -1,0 +1,28 @@
+.productos {
+  width: 100%;
+  max-width: 960px;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.productos th,
+.productos td {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  text-align: left;
+}
+
+.productos th {
+  background-color: #e3f2fd;
+  color: #1976d2;
+  font-weight: 600;
+}
+
+.productos tbody tr:nth-child(even) {
+  background-color: #f5f5f5;
+}
+
+.vacío {
+  color: #757575;
+  font-style: italic;
+}

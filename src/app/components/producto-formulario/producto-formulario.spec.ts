@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { Inventario } from '../../services/inventario';
 import { ProductoFormulario } from './producto-formulario';
 
 describe('ProductoFormulario', () => {
@@ -13,6 +15,11 @@ describe('ProductoFormulario', () => {
     fixture = TestBed.createComponent(ProductoFormulario);
     component = fixture.componentInstance;
     await fixture.whenStable();
+  });
+
+  afterEach(() => {
+    localStorage.clear();
+    TestBed.resetTestingModule();
   });
 
   it('should create', () => {
@@ -106,5 +113,79 @@ describe('ProductoFormulario', () => {
     expect(component['mostrarErrorCruzado']()).toBe(false);
     formulario.markAllAsTouched();
     expect(component['mostrarErrorCruzado']()).toBe(true);
+  });
+
+  it('onSubmit guarda el producto en el inventario', () => {
+    const formulario = component['formulario'];
+    formulario.setValue({
+      codigo: 'P-001',
+      nombre: 'Arroz',
+      categoria: 'Alimentos',
+      precioCompra: 10,
+      precioVenta: 15,
+      existencias: 50,
+      stockMinimo: 5,
+      proveedor: 'Distribuidora A',
+      fechaIngreso: '2026-08-28',
+      descripcion: 'Paquete de arroz',
+      activo: true,
+    });
+
+    component.onSubmit();
+
+    const inventario = TestBed.inject(Inventario);
+    expect(inventario.obtenerTodos()).toEqual([
+      {
+        codigo: 'P-001',
+        nombre: 'Arroz',
+        categoria: 'Alimentos',
+        precioCompra: 10,
+        precioVenta: 15,
+        existencias: 50,
+        stockMinimo: 5,
+        proveedor: 'Distribuidora A',
+        fechaIngreso: '2026-08-28',
+        descripcion: 'Paquete de arroz',
+        activo: true,
+      },
+    ]);
+  });
+
+  it('onSubmit resetea el formulario a su estado inicial', () => {
+    const formulario = component['formulario'];
+    formulario.setValue({
+      codigo: 'P-001',
+      nombre: 'Arroz',
+      categoria: 'Alimentos',
+      precioCompra: 10,
+      precioVenta: 15,
+      existencias: 50,
+      stockMinimo: 5,
+      proveedor: 'Distribuidora A',
+      fechaIngreso: '2026-08-28',
+      descripcion: 'Paquete de arroz',
+      activo: true,
+    });
+
+    component.onSubmit();
+
+    expect(formulario.get('codigo')?.value).toBe('');
+    expect(formulario.get('nombre')?.value).toBe('');
+    expect(formulario.get('precioCompra')?.value).toBe(0);
+    expect(formulario.get('precioVenta')?.value).toBe(0);
+    expect(formulario.get('existencias')?.value).toBe(0);
+    expect(formulario.get('stockMinimo')?.value).toBe(1);
+    expect(formulario.get('activo')?.value).toBe(true);
+  });
+
+  it('onSubmit no guarda cuando el formulario es invalido', () => {
+    const formulario = component['formulario'];
+    formulario.get('codigo')?.setValue('');
+    const inventario = TestBed.inject(Inventario);
+
+    component.onSubmit();
+
+    expect(inventario.obtenerTodos()).toEqual([]);
+    expect(formulario.get('codigo')?.touched).toBe(true);
   });
 });
