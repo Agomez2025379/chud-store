@@ -67,3 +67,6 @@ Este proyecto se trabaja en modo "coworking IA": un agente de IA colabora con el
 - FormGroup, FormControl y validaciones: [docs/investigaciones/formgroup-formcontrol-validaciones.md](docs/investigaciones/formgroup-formcontrol-validaciones.md)
 
 Para añadir una nueva investigación: copiar la plantilla, completar las secciones y registrar el tema en el índice `docs/investigaciones/00-indice.md`.
+
+
+- [ReactiveFormsModule e importaciones globales en Angular](docs/investigaciones/reactive-forms-importaciones.md)
