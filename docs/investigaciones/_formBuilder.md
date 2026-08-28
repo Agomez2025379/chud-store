@@ -1,7 +1,7 @@
-# [FormBuilder e Inyección de Dependencias en Angular]
+# FormBuilder e Inyección de Dependencias en Angular
 
 - **Fecha:** 2026-08-28
-- **Estado:**En revisión
+- **Estado:** Validado
 
 ## Objetivo y contexto
 
@@ -19,7 +19,17 @@ La inyección de dependencias en el constructor (mediante private fb = inject(Fo
 
 El método fb.group({...}) reemplaza a new FormGroup y acepta un objeto donde cada clave define un control mediante un arreglo [valorInicial, validadores].
 
-El código resultante reduce significativamente el número de líneas redundantes y mejora la legibilidad para que el agente de IA procese y modifique la estructura con mayor precisión.*Soporte de Estructuras:** Facilita la creación de `group()`, `control()` y `array()` con validaciones integradas en menos líneas de código.
+El código resultante reduce significativamente el número de líneas redundantes y mejora la legibilidad para que el agente de IA procese y modifique la estructura con mayor precisión.
+
+**Soporte de Estructuras:** Facilita la creación de `group()`, `control()` y `array()` con validaciones integradas en menos líneas de código.
+
+## Estado touched/invalid y mensajes de error visuales
+
+- Angular añade automáticamente clases CSS a cada control según su estado: `ng-invalid`/`ng-valid`, `ng-touched`/`ng-untouched`, `ng-pristine`/`ng-dirty`. Estas clases se usan para el feedback visual sin necesidad de lógica extra en la plantilla.
+- Un control está `touched` cuando el usuario salió de él (blur) o cuando se marca con `markAllAsTouched()`. Un control está `invalid` cuando alguna validación registrada en él falla.
+- El mensaje de error de un campo debe mostrarse solo cuando el control está `touched` y además tiene el error concreto: `*ngIf="mostrarError('codigo', 'required')"`.
+- Al intentar enviar un formulario inválido, `onSubmit()` debe ejecutar `markAllAsTouched()` para que todos los mensajes y estados visuales aparezcan.
+- El error cruzado (p. ej. `precioVenta` debe ser mayor que `precioCompra`) vive en el `FormGroup`, no en los controles, por lo que se consulta con `formulario.hasError(...)` y `formulario.touched`. El resaltado visual de los campos implicados se hace con una clase condicional (`campo-invalido`).
 
 ## Decisiones y conclusiones
 
@@ -29,8 +39,9 @@ El agente debe utilizar this.fb.group({}) para inicializar las propiedades del f
 
 Los controles individuales deben definirse utilizando la sintaxis de arreglos de FormBuilder para agrupar valores por defecto y validadores síncronos/asíncronos.
 
-El agente evitará por completo el uso de new FormControl y new FormGroup en los nuevos componentes de formularios del proyecto.
+Los mensajes de error en la plantilla no deben repetir expresiones largas (`formulario.get('campo')?.touched && ...`); se delegan a métodos helper (`mostrarError(campo, error)` y `mostrarErrorCruzado()`) que concentran la lógica y se reutilizan en cada campo.
 
+El agente evitará por completo el uso de new FormControl y new FormGroup en los nuevos componentes de formularios del proyecto.
 
 ## Repercusiones en el código
 
@@ -40,6 +51,7 @@ Los componentes requerirán que @angular/angular o los módulos correspondientes
 
 La estructura del código en TypeScript será más compacta, facilitando la generación automática de pruebas y la detección de errores de tipos por parte del agente.
 
+El componente `producto-formulario` es la implementación de referencia: inyección por constructor, `fb.group({})`, validadores en arreglos, validación cruzada de precios, métodos helper para los estados `touched`/`invalid` y CSS con `.error`, `ng-invalid.ng-touched` y `campo-invalido`.
 
 ## Fuentes y enlaces
 

@@ -74,4 +74,37 @@ describe('ProductoFormulario', () => {
     });
     expect(formulario.hasError('precioVentaMayorQueCompra')).toBe(false);
   });
+
+  it('mostrarError devuelve true solo cuando el campo esta touched e invalido', () => {
+    const formulario = component['formulario'];
+    formulario.setValue({
+      codigo: '',
+      nombre: 'Arroz',
+      categoria: 'Alimentos',
+      precioCompra: 10,
+      precioVenta: 15,
+      existencias: 50,
+      stockMinimo: 5,
+      proveedor: 'Distribuidora A',
+      fechaIngreso: '2026-08-28',
+      descripcion: 'Paquete de arroz',
+      activo: true,
+    });
+    formulario.markAllAsTouched();
+    expect(component['mostrarError']('codigo', 'required')).toBe(true);
+    expect(component['mostrarError']('nombre', 'required')).toBe(false);
+    formulario.get('codigo')?.markAsUntouched();
+    expect(component['mostrarError']('codigo', 'required')).toBe(false);
+  });
+
+  it('mostrarErrorCruzado requiere que el formulario este touched', () => {
+    const formulario = component['formulario'];
+    formulario.patchValue({
+      precioCompra: 20,
+      precioVenta: 15,
+    });
+    expect(component['mostrarErrorCruzado']()).toBe(false);
+    formulario.markAllAsTouched();
+    expect(component['mostrarErrorCruzado']()).toBe(true);
+  });
 });

@@ -45,6 +45,15 @@ export class ProductoFormulario {
     });
   }
 
+  protected mostrarError(campo: string, error: string): boolean {
+    const control = this.formulario.get(campo);
+    return !!control?.touched && control.hasError(error);
+  }
+
+  protected mostrarErrorCruzado(): boolean {
+    return this.formulario.touched && this.formulario.hasError('precioVentaMayorQueCompra');
+  }
+
   private precioVentaMayorQueCompra(grupo: FormGroup) {
     const precioCompra = grupo.get('precioCompra')?.value as number;
     const precioVenta = grupo.get('precioVenta')?.value as number;
